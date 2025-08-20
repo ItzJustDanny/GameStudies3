@@ -154,6 +154,15 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Zoom"",
+                    ""type"": ""Value"",
+                    ""id"": ""aecf517a-0269-4211-888f-52bf5baf3c9a"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -398,6 +407,72 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""action"": ""Switchshoulder"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Mouse"",
+                    ""id"": ""0c4a0181-2276-4422-a385-190939bd7c90"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""d1c34999-9107-476a-bd9a-66eeeb7586a3"",
+                    ""path"": ""<Mouse>/scroll/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""ff141691-4ffc-4ea8-80ee-591bffca8f16"",
+                    ""path"": ""<Mouse>/scroll/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Gamepad"",
+                    ""id"": ""79354358-1e2b-4ec8-b053-4bb311b96ac9"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""4b2e4091-b20a-46e0-9517-606be8f15e89"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""dc1ea5a3-9446-4ac7-bfec-04e53703b57b"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -1104,6 +1179,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         m_PlayerMap_Jump = m_PlayerMap.FindAction("Jump", throwIfNotFound: true);
         m_PlayerMap_Aim = m_PlayerMap.FindAction("Aim", throwIfNotFound: true);
         m_PlayerMap_Switchshoulder = m_PlayerMap.FindAction("Switchshoulder", throwIfNotFound: true);
+        m_PlayerMap_Zoom = m_PlayerMap.FindAction("Zoom", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1209,6 +1285,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMap_Jump;
     private readonly InputAction m_PlayerMap_Aim;
     private readonly InputAction m_PlayerMap_Switchshoulder;
+    private readonly InputAction m_PlayerMap_Zoom;
     /// <summary>
     /// Provides access to input actions defined in input action map "PlayerMap".
     /// </summary>
@@ -1248,6 +1325,10 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "PlayerMap/Switchshoulder".
         /// </summary>
         public InputAction @Switchshoulder => m_Wrapper.m_PlayerMap_Switchshoulder;
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerMap/Zoom".
+        /// </summary>
+        public InputAction @Zoom => m_Wrapper.m_PlayerMap_Zoom;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1295,6 +1376,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @Switchshoulder.started += instance.OnSwitchshoulder;
             @Switchshoulder.performed += instance.OnSwitchshoulder;
             @Switchshoulder.canceled += instance.OnSwitchshoulder;
+            @Zoom.started += instance.OnZoom;
+            @Zoom.performed += instance.OnZoom;
+            @Zoom.canceled += instance.OnZoom;
         }
 
         /// <summary>
@@ -1327,6 +1411,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @Switchshoulder.started -= instance.OnSwitchshoulder;
             @Switchshoulder.performed -= instance.OnSwitchshoulder;
             @Switchshoulder.canceled -= instance.OnSwitchshoulder;
+            @Zoom.started -= instance.OnZoom;
+            @Zoom.performed -= instance.OnZoom;
+            @Zoom.canceled -= instance.OnZoom;
         }
 
         /// <summary>
@@ -1783,6 +1870,13 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSwitchshoulder(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Zoom" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnZoom(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

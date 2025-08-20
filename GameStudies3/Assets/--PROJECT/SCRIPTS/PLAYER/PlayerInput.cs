@@ -72,16 +72,8 @@ public class PlayerInput : MonoBehaviour
 
         orientation.Rotate(Vector3.up, lookInput.x * rotationSpeed * Time.deltaTime);
 
-        Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
-        orientation.forward = viewDir.normalized;
-
-        Vector3 inputDir = orientation.forward * characterInputMap.PlayerMap.Movement.ReadValue<Vector2>().y +
-                           orientation.right * characterInputMap.PlayerMap.Movement.ReadValue<Vector2>().x;
-
-        if (inputDir != Vector3.zero)
-        {
-            playerObject.forward = Vector3.Slerp(playerObject.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);
-        }
+                 
+        playerObject.forward = Vector3.Slerp(playerObject.forward, orientation.forward, Time.deltaTime * rotationSpeed);
     }
 
     void FixedUpdate()
