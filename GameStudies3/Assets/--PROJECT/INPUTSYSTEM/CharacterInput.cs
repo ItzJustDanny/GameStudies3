@@ -139,12 +139,12 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Aim"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""a563580c-90dc-4775-a171-4ab8c395338d"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Switchshoulder"",
@@ -997,18 +997,18 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             ""id"": ""3c69f963-93d3-476f-bd18-bce44ce0b8fa"",
             ""actions"": [
                 {
-                    ""name"": ""Look"",
+                    ""name"": ""MouseZoom"",
                     ""type"": ""Value"",
-                    ""id"": ""20ed4b5f-3867-4f13-9d5b-c3c352785046"",
+                    ""id"": ""79ea5178-f0d5-4967-9f22-3edb8904e12c"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Zoom"",
+                    ""name"": ""GamePadZoom"",
                     ""type"": ""Value"",
-                    ""id"": ""214beadc-049c-469c-9d80-7b3ee7304a87"",
+                    ""id"": ""e2d4e301-c3ae-4878-8fb2-71e4df8229a7"",
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -1018,89 +1018,45 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""f536222b-5dab-451d-9466-ce4f29bc3df7"",
-                    ""path"": ""<Mouse>/delta"",
+                    ""id"": ""4dfdeb1c-e2e8-4a75-a0a7-bdc75f0f87d1"",
+                    ""path"": ""<Mouse>/scroll"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Look"",
+                    ""action"": ""MouseZoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""aac0d58a-0826-44fa-86c0-6762a03dfa42"",
-                    ""path"": ""<Gamepad>/rightStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""mouse"",
-                    ""id"": ""41fd19ba-65e5-4777-888e-b5ef07cfd954"",
+                    ""name"": ""1D Axis"",
+                    ""id"": ""eb04bc8e-3ea6-495f-9ce4-eed142e8c4e9"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Zoom"",
+                    ""action"": ""GamePadZoom"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": ""negative"",
-                    ""id"": ""734db587-8ed8-45ec-9c47-4e070b41b2ab"",
-                    ""path"": ""<Mouse>/scroll/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Zoom"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""838a1002-9a9d-4b34-b563-901c3bb3a5e8"",
-                    ""path"": ""<Mouse>/scroll/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Zoom"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Gamepad"",
-                    ""id"": ""58ab6987-4748-49c1-a1fb-01f243a97a5e"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Zoom"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""a637bfde-9b8a-4c6f-9bcb-7b2842bc9d28"",
+                    ""id"": ""5dd12dc1-1ffd-47d9-955c-db0556e0c55d"",
                     ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Zoom"",
+                    ""action"": ""GamePadZoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""positive"",
-                    ""id"": ""403d6f37-f18c-4ceb-bed8-994668e0165d"",
+                    ""id"": ""c39f4e8f-c7fb-4f03-adad-5ab8bf43297f"",
                     ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Zoom"",
+                    ""action"": ""GamePadZoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 }
@@ -1194,8 +1150,8 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
         // CameraControls
         m_CameraControls = asset.FindActionMap("CameraControls", throwIfNotFound: true);
-        m_CameraControls_Look = m_CameraControls.FindAction("Look", throwIfNotFound: true);
-        m_CameraControls_Zoom = m_CameraControls.FindAction("Zoom", throwIfNotFound: true);
+        m_CameraControls_MouseZoom = m_CameraControls.FindAction("MouseZoom", throwIfNotFound: true);
+        m_CameraControls_GamePadZoom = m_CameraControls.FindAction("GamePadZoom", throwIfNotFound: true);
     }
 
     ~@CharacterInput()
@@ -1646,8 +1602,8 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
     // CameraControls
     private readonly InputActionMap m_CameraControls;
     private List<ICameraControlsActions> m_CameraControlsActionsCallbackInterfaces = new List<ICameraControlsActions>();
-    private readonly InputAction m_CameraControls_Look;
-    private readonly InputAction m_CameraControls_Zoom;
+    private readonly InputAction m_CameraControls_MouseZoom;
+    private readonly InputAction m_CameraControls_GamePadZoom;
     /// <summary>
     /// Provides access to input actions defined in input action map "CameraControls".
     /// </summary>
@@ -1660,13 +1616,13 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// </summary>
         public CameraControlsActions(@CharacterInput wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "CameraControls/Look".
+        /// Provides access to the underlying input action "CameraControls/MouseZoom".
         /// </summary>
-        public InputAction @Look => m_Wrapper.m_CameraControls_Look;
+        public InputAction @MouseZoom => m_Wrapper.m_CameraControls_MouseZoom;
         /// <summary>
-        /// Provides access to the underlying input action "CameraControls/Zoom".
+        /// Provides access to the underlying input action "CameraControls/GamePadZoom".
         /// </summary>
-        public InputAction @Zoom => m_Wrapper.m_CameraControls_Zoom;
+        public InputAction @GamePadZoom => m_Wrapper.m_CameraControls_GamePadZoom;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1693,12 +1649,12 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_CameraControlsActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_CameraControlsActionsCallbackInterfaces.Add(instance);
-            @Look.started += instance.OnLook;
-            @Look.performed += instance.OnLook;
-            @Look.canceled += instance.OnLook;
-            @Zoom.started += instance.OnZoom;
-            @Zoom.performed += instance.OnZoom;
-            @Zoom.canceled += instance.OnZoom;
+            @MouseZoom.started += instance.OnMouseZoom;
+            @MouseZoom.performed += instance.OnMouseZoom;
+            @MouseZoom.canceled += instance.OnMouseZoom;
+            @GamePadZoom.started += instance.OnGamePadZoom;
+            @GamePadZoom.performed += instance.OnGamePadZoom;
+            @GamePadZoom.canceled += instance.OnGamePadZoom;
         }
 
         /// <summary>
@@ -1710,12 +1666,12 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// <seealso cref="CameraControlsActions" />
         private void UnregisterCallbacks(ICameraControlsActions instance)
         {
-            @Look.started -= instance.OnLook;
-            @Look.performed -= instance.OnLook;
-            @Look.canceled -= instance.OnLook;
-            @Zoom.started -= instance.OnZoom;
-            @Zoom.performed -= instance.OnZoom;
-            @Zoom.canceled -= instance.OnZoom;
+            @MouseZoom.started -= instance.OnMouseZoom;
+            @MouseZoom.performed -= instance.OnMouseZoom;
+            @MouseZoom.canceled -= instance.OnMouseZoom;
+            @GamePadZoom.started -= instance.OnGamePadZoom;
+            @GamePadZoom.performed -= instance.OnGamePadZoom;
+            @GamePadZoom.canceled -= instance.OnGamePadZoom;
         }
 
         /// <summary>
@@ -1964,18 +1920,18 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
     public interface ICameraControlsActions
     {
         /// <summary>
-        /// Method invoked when associated input action "Look" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "MouseZoom" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnLook(InputAction.CallbackContext context);
+        void OnMouseZoom(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Zoom" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "GamePadZoom" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnZoom(InputAction.CallbackContext context);
+        void OnGamePadZoom(InputAction.CallbackContext context);
     }
 }
