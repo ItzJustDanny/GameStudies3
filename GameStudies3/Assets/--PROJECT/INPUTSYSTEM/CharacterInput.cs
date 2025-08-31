@@ -111,9 +111,18 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ActionInput"",
-                    ""type"": ""Button"",
+                    ""name"": ""Sprint"",
+                    ""type"": ""Value"",
                     ""id"": ""498eb5a4-0dd7-400b-9a4f-c17bb3c239d1"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Crouch"",
+                    ""type"": ""Button"",
+                    ""id"": ""7c1af190-3783-4182-88d0-f842d7b1f76e"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -160,6 +169,15 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""type"": ""Value"",
                     ""id"": ""aecf517a-0269-4211-888f-52bf5baf3c9a"",
                     ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Look"",
+                    ""type"": ""Value"",
+                    ""id"": ""5161ee5f-6838-4d1c-be08-aec12df7eb90"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -217,7 +235,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ActionInput"",
+                    ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -228,7 +246,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ActionInput"",
+                    ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -473,6 +491,50 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""action"": ""Zoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f7ac6357-941e-4013-943d-25fda68fc514"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Crouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b6307836-f846-42bf-9141-bece4b75469f"",
+                    ""path"": ""<NimbusGamepadHid>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Crouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d1267bca-19a1-43af-8141-f0027429bb14"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a87c4f94-a8cb-4679-80ab-de1dd39beb38"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -1130,12 +1192,14 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         m_PlayerMap = asset.FindActionMap("PlayerMap", throwIfNotFound: true);
         m_PlayerMap_Movement = m_PlayerMap.FindAction("Movement", throwIfNotFound: true);
         m_PlayerMap_Pause = m_PlayerMap.FindAction("Pause", throwIfNotFound: true);
-        m_PlayerMap_ActionInput = m_PlayerMap.FindAction("ActionInput", throwIfNotFound: true);
+        m_PlayerMap_Sprint = m_PlayerMap.FindAction("Sprint", throwIfNotFound: true);
+        m_PlayerMap_Crouch = m_PlayerMap.FindAction("Crouch", throwIfNotFound: true);
         m_PlayerMap_Attack = m_PlayerMap.FindAction("Attack", throwIfNotFound: true);
         m_PlayerMap_Jump = m_PlayerMap.FindAction("Jump", throwIfNotFound: true);
         m_PlayerMap_Aim = m_PlayerMap.FindAction("Aim", throwIfNotFound: true);
         m_PlayerMap_Switchshoulder = m_PlayerMap.FindAction("Switchshoulder", throwIfNotFound: true);
         m_PlayerMap_Zoom = m_PlayerMap.FindAction("Zoom", throwIfNotFound: true);
+        m_PlayerMap_Look = m_PlayerMap.FindAction("Look", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1236,12 +1300,14 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
     private List<IPlayerMapActions> m_PlayerMapActionsCallbackInterfaces = new List<IPlayerMapActions>();
     private readonly InputAction m_PlayerMap_Movement;
     private readonly InputAction m_PlayerMap_Pause;
-    private readonly InputAction m_PlayerMap_ActionInput;
+    private readonly InputAction m_PlayerMap_Sprint;
+    private readonly InputAction m_PlayerMap_Crouch;
     private readonly InputAction m_PlayerMap_Attack;
     private readonly InputAction m_PlayerMap_Jump;
     private readonly InputAction m_PlayerMap_Aim;
     private readonly InputAction m_PlayerMap_Switchshoulder;
     private readonly InputAction m_PlayerMap_Zoom;
+    private readonly InputAction m_PlayerMap_Look;
     /// <summary>
     /// Provides access to input actions defined in input action map "PlayerMap".
     /// </summary>
@@ -1262,9 +1328,13 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Pause => m_Wrapper.m_PlayerMap_Pause;
         /// <summary>
-        /// Provides access to the underlying input action "PlayerMap/ActionInput".
+        /// Provides access to the underlying input action "PlayerMap/Sprint".
         /// </summary>
-        public InputAction @ActionInput => m_Wrapper.m_PlayerMap_ActionInput;
+        public InputAction @Sprint => m_Wrapper.m_PlayerMap_Sprint;
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerMap/Crouch".
+        /// </summary>
+        public InputAction @Crouch => m_Wrapper.m_PlayerMap_Crouch;
         /// <summary>
         /// Provides access to the underlying input action "PlayerMap/Attack".
         /// </summary>
@@ -1285,6 +1355,10 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "PlayerMap/Zoom".
         /// </summary>
         public InputAction @Zoom => m_Wrapper.m_PlayerMap_Zoom;
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerMap/Look".
+        /// </summary>
+        public InputAction @Look => m_Wrapper.m_PlayerMap_Look;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1317,9 +1391,12 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
-            @ActionInput.started += instance.OnActionInput;
-            @ActionInput.performed += instance.OnActionInput;
-            @ActionInput.canceled += instance.OnActionInput;
+            @Sprint.started += instance.OnSprint;
+            @Sprint.performed += instance.OnSprint;
+            @Sprint.canceled += instance.OnSprint;
+            @Crouch.started += instance.OnCrouch;
+            @Crouch.performed += instance.OnCrouch;
+            @Crouch.canceled += instance.OnCrouch;
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
@@ -1335,6 +1412,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @Zoom.started += instance.OnZoom;
             @Zoom.performed += instance.OnZoom;
             @Zoom.canceled += instance.OnZoom;
+            @Look.started += instance.OnLook;
+            @Look.performed += instance.OnLook;
+            @Look.canceled += instance.OnLook;
         }
 
         /// <summary>
@@ -1352,9 +1432,12 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
-            @ActionInput.started -= instance.OnActionInput;
-            @ActionInput.performed -= instance.OnActionInput;
-            @ActionInput.canceled -= instance.OnActionInput;
+            @Sprint.started -= instance.OnSprint;
+            @Sprint.performed -= instance.OnSprint;
+            @Sprint.canceled -= instance.OnSprint;
+            @Crouch.started -= instance.OnCrouch;
+            @Crouch.performed -= instance.OnCrouch;
+            @Crouch.canceled -= instance.OnCrouch;
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
@@ -1370,6 +1453,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @Zoom.started -= instance.OnZoom;
             @Zoom.performed -= instance.OnZoom;
             @Zoom.canceled -= instance.OnZoom;
+            @Look.started -= instance.OnLook;
+            @Look.performed -= instance.OnLook;
+            @Look.canceled -= instance.OnLook;
         }
 
         /// <summary>
@@ -1792,12 +1878,19 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnPause(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "ActionInput" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Sprint" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnActionInput(InputAction.CallbackContext context);
+        void OnSprint(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Crouch" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCrouch(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Attack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
@@ -1833,6 +1926,13 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnZoom(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Look" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnLook(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
