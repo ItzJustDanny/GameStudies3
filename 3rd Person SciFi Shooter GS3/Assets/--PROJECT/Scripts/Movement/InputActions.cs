@@ -33,7 +33,9 @@ public class InputActions : MonoBehaviour
 
     // Movement
     [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float jumpForce = 10f;
+    public float sprintSpeed = 6.5f;
+    private float baseSpeed;
+    [SerializeField] private float jumpForce = 500f;
     [SerializeField] private float gravity = -9.8f;
     [SerializeField] private float rotationSpeed = 500f; 
     private Vector2 moveInput;
@@ -71,6 +73,11 @@ public class InputActions : MonoBehaviour
         // lock cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    void Start()
+    {
+        baseSpeed = moveSpeed;
     }
 
     void OnEnable()
@@ -245,13 +252,16 @@ public class InputActions : MonoBehaviour
         if (context.performed)
         {
             isSprinting = true;
-            ;
+            moveSpeed = sprintSpeed;
+            
         }
         else
         {
             isSprinting = false;
-            ;
+            moveSpeed = baseSpeed;
+            
         }
+        Debug.Log($"Sprint state changed. Current speed: {moveSpeed}");
 
     }
 
@@ -260,12 +270,12 @@ public class InputActions : MonoBehaviour
         if (context.performed)
         {
             isCrouching = true;
-            ;
+            
         }
         else
         {
             isCrouching = false;
-            ;
+            
         }
     }
 

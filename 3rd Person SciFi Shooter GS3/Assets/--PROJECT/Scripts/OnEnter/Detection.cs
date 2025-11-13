@@ -8,11 +8,11 @@ public class Detection : MonoBehaviour
     [SerializeField] private GameObject shield;
     [SerializeField] private GameObject interactMenu;
     [SerializeField] private CharacterController characterController;
-    private bool triggerZone = false;
+    public bool triggerZone = false;
 
-    private InputSystem_Actions characterInput;
+    public InputSystem_Actions characterInput;
 
-    private void Awake()
+    public void Awake()
     {
         // Input System
         characterInput = new InputSystem_Actions();
@@ -35,7 +35,7 @@ public class Detection : MonoBehaviour
         characterInput.Player.InteractButton.canceled -= OnInteraction;
     }
 
-    private void OnInteraction(InputAction.CallbackContext context)
+    public void OnInteraction(InputAction.CallbackContext context)
     {
         Debug.Log("Interact Button Pressed (Input Registered). Trigger Zone State: " + triggerZone);
          
@@ -50,7 +50,7 @@ public class Detection : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
@@ -65,7 +65,7 @@ public class Detection : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    public void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
